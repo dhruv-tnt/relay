@@ -1,0 +1,115 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #e0e0e0;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+header {
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #007bff;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.control-panel,
+.sensor-panel,
+.pin-config {
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.control-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+label {
+  font-size: 1.2em;
+  color: #555;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sensor-panel h2,
+.pin-config h2 {
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.sensor-data p {
+  font-size: 1.2em;
+  margin: 5px 0;
+  color: #333;
+}
+
+.pin-config form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pin-config form label {
+  font-size: 1em;
+  color: #333;
+}
+
+.pin-config form input {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.pin-config form button {
+  align-self: flex-start;
+}

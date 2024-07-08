@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Control System</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('new_bp.static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <h1>Home Control System</h1>
+      </header>
+
+      <main>
+        <div class="control-panel">
+          <div class="control">
+            <label for="demo">Light:</label>
+            <button
+              id="demo"
+              onclick="getData()"
+              type="submit"
+              style="background-color:{{color}}"
+            >
+              {{state}}
+            </button>
+          </div>
+        </div>
+
+        <div class="sensor-panel">
+          <h2>Environment Data</h2>
+          <div class="sensor-data">
+            <p id="temperature">Temperature: --</p>
+            <p id="humidity">Humidity: --</p>
+          </div>
+        </div>
+
+        <div class="pin-config">
+          <h2>Configure GPIO Pins</h2>
+          <form action="{{ url_for('new_bp.set_pins') }}" method="post">
+            <label for="relay_pin">Relay Pin:</label>
+            <input
+              type="number"
+              id="relay_pin"
+              name="relay_pin"
+              value="{{ relay_pin }}"
+            />
+            <label for="dht_pin">DHT Pin:</label>
+            <input
+              type="number"
+              id="dht_pin"
+              name="dht_pin"
+              value="{{ dht_pin }}"
+            />
+            <button type="submit">Set Pins</button>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      const btn = document.getElementById("demo");
+
+      async function getData() {
+        const url = `/about?data=${btn.innerHTML}`;
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            btn.innerHTML = data["state"];
+            btn.style.backgroundColor = data["color"];
+          });
+      }
+
+      function fetchTempHumidity() {
+        const tempUrl = `/temp`;
+        fetch(tempUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById(
+              "temperature"
+            ).innerHTML = `Temperature: ${data.temperature}°C`;
+            document.getElementById(
+              "humidity"
+            ).innerHTML = `Humidity: ${data.humidity}%`;
+          });
+      }
+
+      // Fetch temp and humidity every 3 seconds
+      setInterval(fetchTempHumidity, 3000);
+
+      // Fetch temp and humidity on page load
+      document.addEventListener("DOMContentLoaded", fetchTempHumidity);
+    </script>
+  </body>
+</html>
